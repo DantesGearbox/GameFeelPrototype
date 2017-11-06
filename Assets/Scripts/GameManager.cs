@@ -17,9 +17,11 @@ public class GameManager : MonoBehaviour
 	private Text restartText;
 	private Button restartButton;
 	private GameObject levelImage;
+	[HideInInspector]
 	public bool resetPlayer;
 
-	public float timer = 60.0f;
+	[HideInInspector]
+	public float timer = 0.0f;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	void TaskOnClick(){
-		level = 1;
+		level = 2;
 		timer = 60;
 		SoundManager.instance.musicSource.Play ();
 		levelImage.SetActive (false);

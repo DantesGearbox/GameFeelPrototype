@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab5d8fd68a26f64c819aad6afcdf0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetPlayer: 0
+  timer: 0
 --- !u!114 &114829677828493468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,6 +70,9 @@ MonoBehaviour:
   wallCount:
     minimum: 32
     maximum: 64
+  clockCount:
+    minimum: 1
+    maximum: 3
   exit: {fileID: 1140404453049958, guid: e90e764d0bf8974438e19fb2dea89b05, type: 2}
   floorTiles:
   - {fileID: 1770257396585392, guid: 8f10ac1281643dd489893664cd42ca8b, type: 2}
@@ -77,6 +82,8 @@ MonoBehaviour:
   - {fileID: 1560411234267906, guid: 6ceeac95b3d510443ae4fc838e14bb99, type: 2}
   - {fileID: 1592360335818016, guid: 1d32c4cfe45251b41ab3883d28670a5d, type: 2}
   - {fileID: 1430339651676870, guid: bb18fc7799065ec458c6065f4143131a, type: 2}
+  clockTiles:
+  - {fileID: 1444898849820432, guid: 1ff06d70c3b11514b834de3afc0874df, type: 2}
   outerWallTiles:
   - {fileID: 1208552275119908, guid: 306074f8a39c0114caf0cefe0289ba0e, type: 2}
   - {fileID: 1322682266810618, guid: 63bbe8755e74fa04bb40eb7b142b1a55, type: 2}

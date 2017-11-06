@@ -23,32 +23,34 @@ public class BoardManager : MonoBehaviour
 	}
 
 
-	public int columns = 8;                                         //Number of columns in our game board.
-	public int rows = 8;                                            //Number of rows in our game board.
-	public Count wallCount = new Count (5, 16);                     //Lower and upper limit for our random number of walls per level.
+	public int columns = 32;                                         //Number of columns in our game board.
+	public int rows = 32;                                            //Number of rows in our game board.
+	public Count wallCount = new Count (32, 64);                     //Lower and upper limit for our random number of walls per level.
+	public Count clockCount = new Count (1, 3);                     //Lower and upper limit for our random number of walls per level.
 	public GameObject exit;                                         //Prefab to spawn for exit.
 	public GameObject[] floorTiles;                                 //Array of floor prefabs.
 	public GameObject[] wallTiles;                                  //Array of wall prefabs.
+	public GameObject[] clockTiles;                                 //Array of clock prefabs.
 	public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
+	private Vector3[] exitPoints = new Vector3[5];
 
 	private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
 	private List <Vector3> gridPositions = new List <Vector3> ();   //A list of possible locations to place tiles.
-
-
-
 
 	//TODO: Instead of creating an open edge around the map, generate some random way through
 	//Clears our list gridPositions and prepares it to generate a new board by filling it with vector3s.
 	void InitialiseList ()
 	{
+		int edgeBandSize = 2;
+
 		//Clear our list gridPositions.
 		gridPositions.Clear ();
 
 		//Loop through x axis (columns).
-		for(int x = 1; x < columns-1; x++)
+		for(int x = edgeBandSize; x < columns-edgeBandSize; x++)
 		{
 			//Within each column, loop through y axis (rows).
-			for(int y = 1; y < rows-1; y++)
+			for(int y = edgeBandSize; y < rows-edgeBandSize; y++)
 			{
 				//At each index add a new Vector3 to our list with the x and y coordinates of that position.
 				gridPositions.Add (new Vector3(x, y, 0f));
@@ -70,7 +72,7 @@ public class BoardManager : MonoBehaviour
 			for(int y = -1; y < rows + 1; y++)
 			{
 				//Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-				GameObject toInstantiate = floorTiles[Random.Range (0,floorTiles.Length)];
+				GameObject toInstantiate = floorTiles[Random.Range (0, floorTiles.Length)];
 
 				//Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
 				if(x == -1 || x == columns || y == -1 || y == rows)
@@ -124,6 +126,63 @@ public class BoardManager : MonoBehaviour
 		}
 	}
 
+	public void SetupExit(){
+
+		int lengthFromWall = 3;
+
+		//Upper right
+		exitPoints [0] = new Vector3 (columns-lengthFromWall, rows-lengthFromWall, -1f);
+
+		//Upper left
+		exitPoints [1] = new Vector3 (lengthFromWall-1, rows-lengthFromWall, -1f);
+
+		//Middle
+		exitPoints [2] = new Vector3 (columns/2, rows/2, -1f);
+
+		//Lower Right
+		exitPoints [3] = new Vector3 (columns-lengthFromWall, lengthFromWall-1, -1f);
+
+		//Lower Left// NOT USED
+		exitPoints [4] = new Vector3 (lengthFromWall-1, lengthFromWall-1, -1f);
+
+
+
+		Vector3 exitPoint = exitPoints[Random.Range (0, exitPoints.Length-1)];
+		//Vector3 exitPoint = exitPoints[4];
+
+		//int endSquareSize = 10;
+
+		//-1, -1 til -1, 32
+
+		/*for(int x = -endSquareSize; x < endSquareSize; x++){
+			for(int y = -endSquareSize; y < endSquareSize; y++){
+
+				int newY = y + (int)exitPoint.y;
+				int newX = x + (int)exitPoint.x;
+				gridPositions.RemoveAt ();
+			}
+		}*/
+
+		//Platform with brick4 = element1
+
+		//gridPositions.RemoveAt (randomIndex);
+
+		//Make an empty square
+		//if((x < columns && x > columns-endSquareSize) && (y < rows && y > rows-endSquareSize)){
+		//	continue;
+		//}
+
+		for(int i = 0; i < 3; i++){
+			Instantiate(wallTiles[1], new Vector3(exitPoint.x -i +1, exitPoint.y -2, exitPoint.z), Quaternion.identity);
+		}
+
+		//Instantiate(tileChoice, randomPosition, Quaternion.identity);
+
+
+		//GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
+		Instantiate (exit, exitPoint, Quaternion.identity);
+	}
+
 
 	//SetupScene initializes our level and calls the previous functions to lay out the game board
 	public void SetupScene (int level)
@@ -134,10 +193,11 @@ public class BoardManager : MonoBehaviour
 		//Reset our list of gridpositions.
 		InitialiseList ();
 
+		//Instantiate the exit tile in the upper right hand corner of our game board
+		SetupExit ();
+
 		//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 		LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-
-		//Instantiate the exit tile in the upper right hand corner of our game board
-		Instantiate (exit, new Vector3 (columns - 28, rows - 28, -1f), Quaternion.identity);
+		LayoutObjectAtRandom (clockTiles, clockCount.minimum, clockCount.maximum);
 	}
 }

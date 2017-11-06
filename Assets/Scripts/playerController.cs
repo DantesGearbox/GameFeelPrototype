@@ -49,8 +49,9 @@ public class PlayerController : MonoBehaviour {
 	public bool stopMoving = false;
 
 	private float maxTime = 60.0f;
-	public float timer = 60.0f;
+	public float timer;
 	public Text textTimer;
+	private float timePerClock = 5.0f;
 
 	//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
 	private void OnTriggerEnter2D (Collider2D other)
@@ -66,21 +67,15 @@ public class PlayerController : MonoBehaviour {
 			//Disable the player object since level is over.
 			stopMoving = true;
 		}
-
-		/*
-		//Check if the tag of the trigger collided with is Food.
-		else if(other.tag == "Food")
+		else if(other.tag == "Clock")
 		{
 			//Add pointsPerFood to the players current food total.
-			food += pointsPerFood;
-
-			timer += 5.0f;
+			timer += timePerClock;
 			textTimer.text = ""+timer;
 
 			//Disable the food object the player collided with.
 			other.gameObject.SetActive (false);
 		}
-		*/
 	}
 
 	//Restart reloads the scene when called.
