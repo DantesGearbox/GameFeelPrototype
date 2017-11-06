@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1424152096583590}
+  m_IsPrefabParent: 1
+--- !u!1 &1424152096583590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4298558672739788}
+  - component: {fileID: 114446353802311532}
+  - component: {fileID: 114829677828493468}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4298558672739788
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424152096583590}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2874606, y: 0.5129316, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114446353802311532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424152096583590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab5d8fd68a26f64c819aad6afcdf0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114829677828493468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424152096583590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca91b7cd030425b448a2a4721e1c22f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columns: 32
+  rows: 32
+  wallCount:
+    minimum: 32
+    maximum: 64
+  exit: {fileID: 1140404453049958, guid: e90e764d0bf8974438e19fb2dea89b05, type: 2}
+  floorTiles:
+  - {fileID: 1770257396585392, guid: 8f10ac1281643dd489893664cd42ca8b, type: 2}
+  - {fileID: 1248597717780896, guid: d0da7f0372bea8b4186bb78add3ba61b, type: 2}
+  - {fileID: 1354762775918384, guid: 7e18c87730edab841809fbdfb195f24a, type: 2}
+  wallTiles:
+  - {fileID: 1560411234267906, guid: 6ceeac95b3d510443ae4fc838e14bb99, type: 2}
+  - {fileID: 1592360335818016, guid: 1d32c4cfe45251b41ab3883d28670a5d, type: 2}
+  - {fileID: 1430339651676870, guid: bb18fc7799065ec458c6065f4143131a, type: 2}
+  outerWallTiles:
+  - {fileID: 1208552275119908, guid: 306074f8a39c0114caf0cefe0289ba0e, type: 2}
+  - {fileID: 1322682266810618, guid: 63bbe8755e74fa04bb40eb7b142b1a55, type: 2}
